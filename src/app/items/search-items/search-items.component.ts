@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SearchItemsService} from "./search-items.service";
+import {ItemService} from "../item.service";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 
@@ -12,13 +12,13 @@ export class SearchItemsComponent implements OnInit {
   searchPhrase: string = '';
   searchResult$: Observable<any[]>;
 
-  constructor(private router: Router, private searchItemsService: SearchItemsService) { }
+  constructor(private router: Router, private itemService: ItemService) { }
 
   ngOnInit() {
   }
 
   search() {
-    this.searchResult$ = this.searchItemsService.search(this.searchPhrase);
+    this.searchResult$ = this.itemService.search(this.searchPhrase);
   }
 
   addLostItem() {

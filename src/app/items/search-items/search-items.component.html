@@ -1,17 +1,17 @@
-<div style="display: flex; justify-content: center;" xmlns:flex="http://www.w3.org/1999/xhtml">
+<div style="display: flex; justify-content: center;">
   <div class="grid-container" style="display: grid; grid-template-columns: 75% auto; grid-column-gap: 1rem; max-width: 750px">
     <mat-form-field class="example-full-width" style="grid-column: 1/2">
       <input matInput type="search" placeholder="IMEI/Serial number or name of the item" required [(ngModel)]="searchPhrase">
     </mat-form-field>
-    <button style="grid-column: 2/3" mat-raised-button color="primary" (click)="search()">Search</button>
+    <button style="grid-column: 2/3" mat-raised-button color="accent" (click)="search()">Search</button>
   </div>
 </div>
 <div *ngIf="(searchResult$ | async)?.length == 0">
   <p>Sorry no such item was found in the database. What would you like to do?</p>
 </div>
 <div *ngIf="(searchResult$ | async)" style="display: flex; justify-content: center; flex-wrap: wrap;">
-  <button mat-raised-button (click)="addLostItem()" style="flex: 20%; margin-left: 1rem; margin-right: 1rem">I lost this item</button>
-  <button mat-raised-button (click)="addFoundItem()" style="flex: 20%; margin-left: 1rem; margin-right: 1rem" >I found this item</button>
-  <button mat-raised-button (click)="addOwnedItem()" style="flex: 20%; margin-left: 1rem; margin-right: 1rem">Protect this item</button>
+  <button mat-button color="primary" (click)="addLostItem()" style="flex: 20%; margin-left: 1rem; margin-right: 1rem">I lost this item</button>
+  <button mat-button color="primary" (click)="addFoundItem()" style="flex: 20%; margin-left: 1rem; margin-right: 1rem" >I found this item</button>
+  <button mat-button color="basic" (click)="addOwnedItem()" style="flex: 20%; margin-left: 1rem; margin-right: 1rem">Protect this item</button>
 </div>
 
