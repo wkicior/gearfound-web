@@ -6,20 +6,34 @@
     <button style="grid-column: 2/3" mat-raised-button color="accent" (click)="search()">Search</button>
   </div>
 </div>
-<div *ngIf="(searchResult$ | async)?.length == 0">
+<div *ngIf="(lostItemsSearchResult$ | async)?.length == 0 && (foundItemsSearchResult$ | async)?.length == 0">
   <p>Sorry no such item was found in the database. What would you like to do?</p>
 </div>
-<div *ngIf="(searchResult$ | async)" style="display: flex; justify-content: center; flex-wrap: wrap;">
+<div *ngIf="(lostItemsSearchResult$ | async) && (foundItemsSearchResult$ | async)" style="display: flex; justify-content: center; flex-wrap: wrap;">
   <button mat-button color="primary" (click)="addLostItem()" style="flex: 20%; margin-left: 1rem; margin-right: 1rem">I lost this item</button>
   <button mat-button color="primary" (click)="addFoundItem()" style="flex: 20%; margin-left: 1rem; margin-right: 1rem" >I found this item</button>
   <button mat-button color="basic" (click)="addOwnedItem()" style="flex: 20%; margin-left: 1rem; margin-right: 1rem">Protect this item</button>
 </div>
-<ul>
-<li *ngFor="let lostItem of (searchResult$ | async)">
-  <div>
-  {{lostItem.name}} - {{lostItem.serialNumber}} -- {{lostItem.lostDate}} -- {{lostItem.lostPlace}}
-    <p>{{lostItem.description}}</p>
-  </div>
-</li>
-</ul>
+<div *ngIf="(lostItemsSearchResult$ | async)?.length > 0">
+  <h3>Lost items matched</h3>
+  <ul>
+    <li *ngFor="let lostItem of (lostItemsSearchResult$ | async)">
+      <div>
+      {{lostItem.name}} - {{lostItem.serialNumber}} -- {{lostItem.lostDate}} -- {{lostItem.lostPlace}}
+        <p>{{lostItem.description}}</p>
+      </div>
+    </li>
+  </ul>
+</div>
+<div *ngIf="(foundItemsSearchResult$ | async)?.length > 0">
+  <h3>Found items matched</h3>
+  <ul>
+    <li *ngFor="let foundItem of (foundItemsSearchResult$ | async)">
+      <div>
+        {{foundItem.name}} - {{foundItem.serialNumber}} -- {{foundItem.lostDate}} -- {{foundItem.lostPlace}}
+        <p>{{foundItem.description}}</p>
+      </div>
+    </li>
+  </ul>
+</div>
 

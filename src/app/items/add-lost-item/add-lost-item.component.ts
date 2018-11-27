@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {LostItem} from "./lost-item";
+import {LostItem} from "../lost-item";
 import {LostItemService} from "../lost-item.service";
 
 @Component({

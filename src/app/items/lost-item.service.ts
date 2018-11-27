@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {LostItem} from "./add-lost-item/lost-item";
+import {LostItem} from "./lost-item";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
@@ -10,8 +10,8 @@ export class LostItemService {
 
   constructor(private http: HttpClient) { }
 
-  public save(lostItem: LostItem) {
-    return this.http.post("http://localhost:8080/lost-items", lostItem);
+  public save(lostItem: LostItem): Observable<LostItem> {
+    return this.http.post<LostItem>("http://localhost:8080/lost-items", lostItem);
   }
 
   public search(searchPhrase: string): Observable<LostItem[]> {

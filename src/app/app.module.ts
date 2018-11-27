@@ -9,12 +9,14 @@ import { SearchItemsComponent } from './items/search-items/search-items.componen
 import { AddLostItemComponent } from './items/add-lost-item/add-lost-item.component';
 import { FormsModule } from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {AddFoundItemComponent} from "./items/add-found-item/add-found-item.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchItemsComponent,
     AddLostItemComponent,
+    AddFoundItemComponent,
   ],
   imports: [
     BrowserModule,
