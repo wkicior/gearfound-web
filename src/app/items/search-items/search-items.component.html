@@ -14,4 +14,12 @@
   <button mat-button color="primary" (click)="addFoundItem()" style="flex: 20%; margin-left: 1rem; margin-right: 1rem" >I found this item</button>
   <button mat-button color="basic" (click)="addOwnedItem()" style="flex: 20%; margin-left: 1rem; margin-right: 1rem">Protect this item</button>
 </div>
+<ul>
+<li *ngFor="let lostItem of (searchResult$ | async)">
+  <div>
+  {{lostItem.name}} - {{lostItem.serialNumber}} -- {{lostItem.lostDate}} -- {{lostItem.lostPlace}}
+    <p>{{lostItem.description}}</p>
+  </div>
+</li>
+</ul>
 
