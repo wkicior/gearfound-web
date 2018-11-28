@@ -15,6 +15,6 @@ export class LostItemService {
   }
 
   public search(searchPhrase: string): Observable<LostItem[]> {
-    return this.http.get<LostItem[]>('http://localhost:8080/lost-items');
+    return this.http.get<LostItem[]>(`http://localhost:8080/lost-items?search=${searchPhrase}`);
   }
 }
