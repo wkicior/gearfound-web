@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {LostItem} from "../lost-item";
 import {LostItemService} from "../lost-item.service";
 import {FoundItemService} from "../found-item.service";
@@ -13,7 +13,7 @@ import {FoundItem} from "../found-item";
 export class AddFoundItemComponent implements OnInit {
   item: FoundItem;
 
-  constructor(private route: ActivatedRoute, private foundItemService: FoundItemService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private foundItemService: FoundItemService) { }
 
   ngOnInit() {
     this.item = {
@@ -25,6 +25,6 @@ export class AddFoundItemComponent implements OnInit {
   }
 
   save() {
-    this.foundItemService.save(this.item).subscribe();
+    this.foundItemService.save(this.item).subscribe(() => this.router.navigate(['']));
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {LostItem} from "../lost-item";
 import {LostItemService} from "../lost-item.service";
 
@@ -11,7 +11,7 @@ import {LostItemService} from "../lost-item.service";
 export class AddLostItemComponent implements OnInit {
   item: LostItem;
 
-  constructor(private route: ActivatedRoute, private lostItemService: LostItemService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private lostItemService: LostItemService) { }
 
   ngOnInit() {
     this.item = {
@@ -23,6 +23,6 @@ export class AddLostItemComponent implements OnInit {
   }
 
   save() {
-    this.lostItemService.save(this.item).subscribe();
+    this.lostItemService.save(this.item).subscribe(() => this.router.navigate(['']));
   }
 }
