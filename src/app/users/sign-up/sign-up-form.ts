@@ -13,7 +13,7 @@ export class SignUpForm extends FormGroup {
   constructor() {
     super({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl(''),
+      password: new FormControl('', [Validators.minLength(8)]),
       passwordRepeat: new FormControl(''),
     }, {validators: SignUpForm.checkPasswords})
   }
@@ -21,7 +21,6 @@ export class SignUpForm extends FormGroup {
   static checkPasswords(group: FormGroup) {
     let pass = group.controls.password.value;
     let confirmPass = group.controls.passwordRepeat.value;
-
     return pass === confirmPass ? null : { passwordsDoNotMatch: true }
   }
 }

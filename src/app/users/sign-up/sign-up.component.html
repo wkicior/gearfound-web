@@ -9,7 +9,8 @@
       </div>
       <div>
         <mat-form-field>
-          <input matInput type="password" placeholder="Password" required formControlName="password">
+          <input matInput type="password" placeholder="Password" minlength="8" required formControlName="password">
+          <mat-error *ngIf="userForm.get('password').hasError('minlength')">Minimal password length is 8 characters</mat-error>
         </mat-form-field>
       </div>
       <div>
@@ -23,7 +24,6 @@
       <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid">Register</button>
     </form>
   </div>
-
 </div>
 
 
