@@ -1,0 +1,11 @@
+<div [ngClass]="isResponsive ? 'topnav responsive' : 'topnav'" id="myTopnav">
+  <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Home</a>
+  <a href="#news">News</a>
+  <a href="#contact">Contact</a>
+  <a routerLink="/sign-up" routerLinkActive="active">Sign Up</a>
+  <a href="javascript:void(0);" class="icon" (click)="toggle()">
+    <i class="material-icons">
+      reorder
+    </i>
+  </a>
+</div>
