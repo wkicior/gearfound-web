@@ -12,12 +12,14 @@ import {HttpClientModule} from "@angular/common/http";
 import {AddFoundItemComponent} from "./items/add-found-item/add-found-item.component";
 import {TopNavigationComponent} from "./top-navigation/top-navigation.component";
 import {SignUpComponent} from "./users/sign-up/sign-up.component";
+import {LogInComponent} from "./users/log-in/log-in.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     TopNavigationComponent,
     SignUpComponent,
+    LogInComponent,
     SearchItemsComponent,
     AddLostItemComponent,
     AddFoundItemComponent,

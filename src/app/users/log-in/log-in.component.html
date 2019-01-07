@@ -1,0 +1,19 @@
+<div style="display: flex; justify-content: center;">
+  <div style="max-width: 700px;" >
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div>
+        <mat-form-field>
+          <input matInput type="email" placeholder="Email address" formControlName="email">
+          <mat-error *ngIf="loginForm.get('email').hasError('loginFailed')">Incorrect email or password</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" required formControlName="password">
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Log in</button>
+    </form>
+  </div>
+</div>
+
