@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticationService} from "../auth/authentication.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-top-navigation',
@@ -7,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopNavigationComponent implements OnInit {
   isResponsive: boolean = false;
+  isAuthenticated$: Observable<boolean>
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+    this.isAuthenticated$ = this.authenticationService.isAuthenticated();
   }
 
   toggle() {

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {TokenPasswordExchange} from "./token-password-exchange";
 
 @Injectable({
@@ -15,6 +15,9 @@ export class TokenService {
     body.set('username', email);
     body.set('password', password);
     body.set('grant_type', 'password');
-    return this.httpClient.post<TokenPasswordExchange>('http://localhost:8080/api/oauth/token', body);
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
+    return this.httpClient.post<TokenPasswordExchange>('http://localhost:8080/api/oauth/token', body.toString(), options);
   }
 }
