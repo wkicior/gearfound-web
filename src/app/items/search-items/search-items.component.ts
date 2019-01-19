@@ -5,6 +5,7 @@ import {LostItemService} from "../lost-item.service";
 import {LostItem} from "../lost-item";
 import {FoundItem} from "../found-item";
 import {FoundItemService} from "../found-item.service";
+import {share} from "rxjs/operators";
 
 @Component({
   selector: 'app-search',
@@ -24,8 +25,8 @@ export class SearchItemsComponent implements OnInit {
   }
 
   search() {
-    this.lostItemsSearchResult$ = this.lostItemService.search(this.searchPhrase);
-    this.foundItemsSearchResult$ = this.foundItemService.search(this.searchPhrase);
+    this.lostItemsSearchResult$ = this.lostItemService.search(this.searchPhrase).pipe(share());
+    this.foundItemsSearchResult$ = this.foundItemService.search(this.searchPhrase).pipe(share());
   }
 
   addLostItem() {
