@@ -23,7 +23,7 @@ export class AuthenticationService {
   public accessToken(): Observable<string> {
     return this.exchangeToken$.asObservable().pipe(
       share(),
-      switchMap(exchangeToken => exchangeToken === null && this.sessionStorageService.session.refreshToken !== null ? this.refreshToken() : of(exchangeToken)),
+      switchMap(exchangeToken => exchangeToken === null && this.sessionStorageService.session.refreshToken ? this.refreshToken() : of(exchangeToken)),
       map(exchangeToken => exchangeToken === null ? null : exchangeToken.access_token)
     );
   }
@@ -39,6 +39,7 @@ export class AuthenticationService {
   }
 
   private invalidateSession() {
+    console.log('invalidating session');
     this.exchangeToken$.next(null);
     this.sessionStorageService.cleanSession()
   }

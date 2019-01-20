@@ -13,7 +13,10 @@ import {AddFoundItemComponent} from "./items/add-found-item/add-found-item.compo
 import {TopNavigationComponent} from "./top-navigation/top-navigation.component";
 import {SignUpComponent} from "./users/sign-up/sign-up.component";
 import {LogInComponent} from "./users/log-in/log-in.component";
-import {AuthenticationTokenInterceptorService} from "./auth/authentication-token-interceptor.service";
+import {
+  AuthenticationTokenInterceptorService,
+  TOKEN_INTERCEPTOR_URL_WHITELIST
+} from "./auth/authentication-token-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -34,11 +37,17 @@ import {AuthenticationTokenInterceptorService} from "./auth/authentication-token
     MaterialModule,
     ReactiveFormsModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthenticationTokenInterceptorService,
-    multi: true
-  }],
+  providers: [
+    {
+      provide: TOKEN_INTERCEPTOR_URL_WHITELIST,
+      useValue: ['http://localhost:8080/api/items'],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationTokenInterceptorService,
+      multi: true
+    }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

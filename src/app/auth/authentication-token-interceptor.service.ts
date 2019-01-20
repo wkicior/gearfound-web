@@ -1,22 +1,26 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable, InjectionToken} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AuthenticationService} from "./authentication.service";
 import {map, switchMap, take} from "rxjs/operators";
 
+export const TOKEN_INTERCEPTOR_URL_WHITELIST =
+  new InjectionToken<string[]>('token-interceptor-url-whitelist');
+
 @Injectable()
 export class AuthenticationTokenInterceptorService implements HttpInterceptor {
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService, @Inject(TOKEN_INTERCEPTOR_URL_WHITELIST) private urlWhitelist: string[]) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!request.url.startsWith('http://localhost:8080/api/items')) {
+    if(this.urlWhitelist.find(uw => request.url.startsWith(uw))) {
+      return this.authenticationService.isAuthenticated().pipe(
+        take(1),
+        switchMap(authenticated => authenticated ? this.handleAuthenticated(request, next) : next.handle(request))
+      );
+    } else {
       return next.handle(request);
     }
-    return this.authenticationService.isAuthenticated().pipe(
-      take(1),
-      switchMap(authenticated => authenticated ? this.handleAuthenticated(request, next) : next.handle(request))
-    );
   }
 
   private handleAuthenticated(request: HttpRequest<any>, next: HttpHandler) {
