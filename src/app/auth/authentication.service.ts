@@ -40,8 +40,8 @@ export class AuthenticationService {
 
   private invalidateSession() {
     console.log('invalidating session');
+    this.sessionStorageService.cleanSession();
     this.exchangeToken$.next(null);
-    this.sessionStorageService.cleanSession()
   }
 
   private storeToken(exchangeToken: TokenPasswordExchange) {
@@ -52,5 +52,9 @@ export class AuthenticationService {
 
   isAuthenticated(): Observable<boolean> {
     return this.accessToken().pipe(map(token => token !== null));
+  }
+
+  logout() {
+    this.invalidateSession();
   }
 }

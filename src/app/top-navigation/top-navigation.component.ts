@@ -20,4 +20,8 @@ export class TopNavigationComponent implements OnInit {
   toggle() {
    this.isResponsive = !this.isResponsive;
   }
+
+  logout() {
+    this.authenticationService.logout();
+  }
 }

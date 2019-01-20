@@ -4,6 +4,7 @@
   <a href="#contact">Contact</a>
   <a *ngIf="!(isAuthenticated$ | async)" routerLink="/sign-up" routerLinkActive="active">Sign Up</a>
   <a *ngIf="!(isAuthenticated$ | async)" routerLink="/log-in" routerLinkActive="active">Log in</a>
+  <a *ngIf="(isAuthenticated$ | async)" (click)="logout()">Log out</a>
   <a href="javascript:void(0);" class="icon" (click)="toggle()">
     <i class="material-icons">
       reorder
