@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {iif, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {AuthenticationService} from "./authentication.service";
-import {map, mergeMap, switchMap, take} from "rxjs/operators";
+import {map, switchMap, take} from "rxjs/operators";
 
 @Injectable()
 export class AuthenticationTokenInterceptorService implements HttpInterceptor {
@@ -10,6 +10,9 @@ export class AuthenticationTokenInterceptorService implements HttpInterceptor {
   constructor(private authenticationService: AuthenticationService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (!request.url.startsWith('http://localhost:8080/api/items')) {
+      return next.handle(request);
+    }
     return this.authenticationService.isAuthenticated().pipe(
       take(1),
       switchMap(authenticated => authenticated ? this.handleAuthenticated(request, next) : next.handle(request))
@@ -17,18 +20,17 @@ export class AuthenticationTokenInterceptorService implements HttpInterceptor {
   }
 
   private handleAuthenticated(request: HttpRequest<any>, next: HttpHandler) {
-    console.log('handle authenticated')
-    return this.authenticationService.exchangeToken$.pipe(
+    return this.authenticationService.accessToken().pipe(
       take(1),
       map(token => this.getRequestWithAuthentiationToken(request, token)),
       switchMap(authentiatedRequest => next.handle(authentiatedRequest))
     );
   }
 
-  private getRequestWithAuthentiationToken(request: HttpRequest<any>, token) {
+  private getRequestWithAuthentiationToken(request: HttpRequest<any>, token: string) {
     return request.clone({
       setHeaders: {
-        Authorization: `Bearer ${token.access_token}`
+        Authorization: `Bearer ${token}`
       }
     });
   }

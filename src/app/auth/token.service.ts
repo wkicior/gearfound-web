@@ -20,4 +20,14 @@ export class TokenService {
     };
     return this.httpClient.post<TokenPasswordExchange>('http://localhost:8080/api/oauth/token', body.toString(), options);
   }
+
+  public refreshToken(refreshToken: string) : Observable<TokenPasswordExchange> {
+    const body = new URLSearchParams();
+    body.set('refresh_token', refreshToken);
+    body.set('grant_type', 'refresh_token');
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
+    return this.httpClient.post<TokenPasswordExchange>('http://localhost:8080/api/oauth/token', body.toString(), options);
+  }
 }
