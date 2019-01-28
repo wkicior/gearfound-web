@@ -11,7 +11,7 @@ import {UserSignUp} from "./user-sign-up";
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
-  userForm = new SignUpForm()
+  userForm = new SignUpForm();
 
   constructor(private signUpService: SignUpService) { }
 

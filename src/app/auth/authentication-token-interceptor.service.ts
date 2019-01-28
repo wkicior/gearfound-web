@@ -8,12 +8,12 @@ export const TOKEN_INTERCEPTOR_URL_WHITELIST =
   new InjectionToken<string[]>('token-interceptor-url-whitelist');
 
 @Injectable()
-export class AuthenticationTokenInterceptorService implements HttpInterceptor {
+export class AuthenticationTokenInterceptor implements HttpInterceptor {
 
   constructor(private authenticationService: AuthenticationService, @Inject(TOKEN_INTERCEPTOR_URL_WHITELIST) private urlWhitelist: string[]) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if(this.urlWhitelist.find(uw => request.url.startsWith(uw))) {
+    if(this.requestOnTokenSupported(request)) {
       return this.authenticationService.isAuthenticated().pipe(
         take(1),
         switchMap(authenticated => authenticated ? this.handleAuthenticated(request, next) : next.handle(request))
@@ -21,6 +21,10 @@ export class AuthenticationTokenInterceptorService implements HttpInterceptor {
     } else {
       return next.handle(request);
     }
+  }
+
+  private requestOnTokenSupported(request: HttpRequest<any>): boolean {
+    return this.urlWhitelist.find(uw => request.url.startsWith(uw)) !== undefined;
   }
 
   private handleAuthenticated(request: HttpRequest<any>, next: HttpHandler) {

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {LogInForm} from "./log-in-form";
+import {LoginFailedErrorStateMatcher, LogInForm} from "./log-in-form";
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../auth/authentication.service";
+import {ErrorStateMatcher} from "@angular/material";
+import {FormControl, FormGroupDirective, NgForm} from "@angular/forms";
 
 
 @Component({
@@ -22,8 +24,7 @@ export class LogInComponent implements OnInit {
     this.authenticationService.login(this.loginForm.get('email').value, this.loginForm.get('password').value)
       .subscribe(() => this.router.navigate(['/']),
         () => {
-          this.loginForm.controls['email'].setErrors({'loginFailed': true});
-          this.loginForm.controls['password'].setErrors({'loginFailed': true});
+        this.loginForm.setErrors({'loginFailed': true});
       });
   }
 }

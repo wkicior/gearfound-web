@@ -11,7 +11,7 @@ export class FoundItemService {
   constructor(private http: HttpClient) { }
 
   public save(foundItem: FoundItem): Observable<FoundItem> {
-    return this.http.post<FoundItem>("http://localhost:8080/api/itemsfound-items", foundItem);
+    return this.http.post<FoundItem>("http://localhost:8080/api/items/found-items", foundItem);
   }
 
   public search(searchPhrase: string): Observable<FoundItem[]> {

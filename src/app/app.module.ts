@@ -14,9 +14,10 @@ import {TopNavigationComponent} from "./top-navigation/top-navigation.component"
 import {SignUpComponent} from "./users/sign-up/sign-up.component";
 import {LogInComponent} from "./users/log-in/log-in.component";
 import {
-  AuthenticationTokenInterceptorService,
+  AuthenticationTokenInterceptor,
   TOKEN_INTERCEPTOR_URL_WHITELIST
 } from "./auth/authentication-token-interceptor.service";
+import {AuthenticationRefreshTokenInterceptor} from "./auth/authentication-refresh-token-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -44,7 +45,12 @@ import {
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthenticationTokenInterceptorService,
+      useClass: AuthenticationRefreshTokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationTokenInterceptor,
       multi: true
     }
     ],
