@@ -14,42 +14,8 @@
   <button mat-button color="primary" (click)="addFoundItem()" style="flex: 20%; margin-left: 1rem; margin-right: 1rem" >I found this item</button>
   <button mat-button color="basic" (click)="addOwnedItem()" style="flex: 20%; margin-left: 1rem; margin-right: 1rem">Protect this item</button>
 </div>
-<div *ngIf="(lostItemsSearchResult$ | async)?.length > 0">
-  <h3>Lost items matched</h3>
-  <mat-accordion class="items-align">
-    <mat-expansion-panel *ngFor="let lostItem of (lostItemsSearchResult$ | async)">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ lostItem.name }}
-        </mat-panel-title>
-        <mat-panel-description>
-          {{ lostItem.serialNumber }}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div>
-        Lost {{lostItem.lostDate | date }} - {{lostItem.lostPlace}}
-        <p>{{lostItem.description}}</p>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-</div>
-<div *ngIf="(foundItemsSearchResult$ | async)?.length > 0">
-  <h3>Found items matched</h3>
-  <mat-accordion class="items-align">
-    <mat-expansion-panel *ngFor="let foundItem of (foundItemsSearchResult$ | async)">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ foundItem.name }}
-        </mat-panel-title>
-        <mat-panel-description>
-          {{ foundItem.serialNumber }}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div>
-        Lost {{foundItem.foundDate | date }} - {{foundItem.foundPlace}}
-        <p>{{foundItem.description}}</p>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-</div>
+<app-lost-items-list [lostItems$]="lostItemsSearchResult$" title="Lost items matched"></app-lost-items-list>
+<app-found-items-list [foundItems$]="foundItemsSearchResult$" title="Found items matched"></app-found-items-list>
+
+
 

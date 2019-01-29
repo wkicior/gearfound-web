@@ -1,0 +1,19 @@
+<div *ngIf="(lostItems$ | async)?.length > 0">
+  <h3>{{ title }}</h3>
+  <mat-accordion class="items-align">
+    <mat-expansion-panel *ngFor="let lostItem of (lostItems$ | async)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ lostItem.name }}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ lostItem.serialNumber }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div>
+        Lost {{lostItem.lostDate | date }} - {{lostItem.lostPlace}}
+        <p>{{lostItem.description}}</p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

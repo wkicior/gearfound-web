@@ -11,11 +11,12 @@ export class AuthenticationGuard implements CanActivate {
   constructor(private authenticationService: AuthenticationService, private router: Router) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    console.log(next.url.toString());
     return this.authenticationService.isAuthenticated().pipe(
       take(1),
       tap(authenticated => {
         if (!authenticated) {
-          this.router.navigate(['/log-in']);
+          this.router.navigate(['/log-in', {'navigateTo': next.url}]);
         }
       })
     );

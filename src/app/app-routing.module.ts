@@ -10,8 +10,8 @@ import {AuthenticationGuard} from "./auth/authentication.guard";
 
 const routes: Routes = [
   { path: 'search', component: SearchItemsComponent },
-  { path: 'add-lost-item', component: AddLostItemComponent },
-  { path: 'add-found-item', component: AddFoundItemComponent },
+  { path: 'add-lost-item', component: AddLostItemComponent, canActivate: [AuthenticationGuard] },
+  { path: 'add-found-item', component: AddFoundItemComponent, canActivate: [AuthenticationGuard] },
   { path: 'my-items', component: MyItemsComponent, canActivate: [AuthenticationGuard] },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'log-in', component: LogInComponent },

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginFailedErrorStateMatcher, LogInForm} from "./log-in-form";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AuthenticationService} from "../../auth/authentication.service";
 import {ErrorStateMatcher} from "@angular/material";
 import {FormControl, FormGroupDirective, NgForm} from "@angular/forms";
@@ -14,15 +14,18 @@ import {FormControl, FormGroupDirective, NgForm} from "@angular/forms";
 export class LogInComponent implements OnInit {
 
   loginForm = new LogInForm();
+  private navigateTo: string;
 
-  constructor(private router: Router, private authenticationService: AuthenticationService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+    this.navigateTo = this.route.snapshot.paramMap.get('navigateTo') || '/';
+    console.log(this.navigateTo)
   }
 
   login() {
     this.authenticationService.login(this.loginForm.get('email').value, this.loginForm.get('password').value)
-      .subscribe(() => this.router.navigate(['/']),
+      .subscribe(() => this.router.navigateByUrl(this.navigateTo),
         () => {
         this.loginForm.setErrors({'loginFailed': true});
       });

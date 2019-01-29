@@ -1,0 +1,19 @@
+<div *ngIf="(foundItems$ | async)?.length > 0">
+  <h3>Found items matched</h3>
+  <mat-accordion class="items-align">
+    <mat-expansion-panel *ngFor="let foundItem of (foundItems$ | async)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ foundItem.name }}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ foundItem.serialNumber }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div>
+        Lost {{foundItem.foundDate | date }} - {{foundItem.foundPlace}}
+        <p>{{foundItem.description}}</p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
