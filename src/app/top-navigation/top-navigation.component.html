@@ -1,7 +1,7 @@
 <div [ngClass]="isResponsive ? 'topnav responsive' : 'topnav'" id="myTopnav">
   <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Home</a>
   <a href="#news">News</a>
-  <a href="#contact">Contact</a>
+  <a *ngIf="(isAuthenticated$ | async)" routerLink="/my-items">My items</a>
   <a *ngIf="!(isAuthenticated$ | async)" routerLink="/sign-up" routerLinkActive="active">Sign Up</a>
   <a *ngIf="!(isAuthenticated$ | async)" routerLink="/log-in" routerLinkActive="active">Log in</a>
   <a *ngIf="(isAuthenticated$ | async)" (click)="logout()">Log out</a>

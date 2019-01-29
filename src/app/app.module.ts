@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from "./material.module";
 import { SearchItemsComponent } from './items/search-items/search-items.component';
 import { AddLostItemComponent } from './items/add-lost-item/add-lost-item.component';
+import { MyItemsComponent } from "./items/my-items/my-items.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AddFoundItemComponent} from "./items/add-found-item/add-found-item.component";
@@ -19,6 +20,7 @@ import {
 } from "./auth/authentication-token-interceptor.service";
 import {AuthenticationRefreshTokenInterceptor} from "./auth/authentication-refresh-token-interceptor.service";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +30,7 @@ import {AuthenticationRefreshTokenInterceptor} from "./auth/authentication-refre
     SearchItemsComponent,
     AddLostItemComponent,
     AddFoundItemComponent,
+    MyItemsComponent
   ],
   imports: [
     BrowserModule,
