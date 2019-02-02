@@ -1,3 +1,5 @@
-<p>
-  my-items works!
-</p>
+<div *ngIf="(lostItems$ | async) && (foundItems$ | async)" style="display: flex; justify-content: center; flex-wrap: wrap;">
+  You have no items
+</div>
+<app-lost-items-list [lostItems$]="lostItems$" title="My lost items"></app-lost-items-list>
+<app-found-items-list [foundItems$]="foundItems$" title="My found items"></app-found-items-list>

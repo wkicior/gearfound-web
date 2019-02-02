@@ -15,7 +15,7 @@ import {share} from "rxjs/operators";
 export class SearchItemsComponent implements OnInit {
   searchPhrase: string = '';
   lostItemsSearchResult$: Observable<LostItem[]>;
-  foundItemsSearchResult$: Observable<FoundItem[]>
+  foundItemsSearchResult$: Observable<FoundItem[]>;
 
   constructor(private router: Router,
               private lostItemService: LostItemService,
