@@ -19,5 +19,4 @@ export class LostItemComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.lostItem$ = this.lostItemService.getLostItemById(id).pipe(share());
   }
-
 }

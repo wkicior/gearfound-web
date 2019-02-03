@@ -4,7 +4,7 @@
     <mat-expansion-panel *ngFor="let foundItem of (foundItems$ | async)">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{ foundItem.name }}
+          <a routerLink="/found-items/{{foundItem.id}}">{{ foundItem.name }}</a>
         </mat-panel-title>
         <mat-panel-description>
           {{ foundItem.serialNumber }}

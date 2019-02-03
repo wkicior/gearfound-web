@@ -12,14 +12,25 @@ export class AuthenticationRefreshTokenInterceptor implements HttpInterceptor {
   constructor(private authenticationService: AuthenticationService, @Inject(TOKEN_INTERCEPTOR_URL_WHITELIST) private urlWhitelist: string[]) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(request).pipe(catchError(error => {
-      console.log('will retry? : ' + error.status + ' '+ this.requestOnTokenSupported(request));
-      if (error.status === 401 && this.requestOnTokenSupported(request)) {
-        return this.authenticationService.refreshToken().pipe(
-          switchMap(() => next.handle(request)));
-      }
-      throw(error);
-    }));
+    return next.handle(request).pipe(
+      catchError(error => {
+        console.log('will retry? : ' + error.status + ' ' + this.requestOnTokenSupported(request));
+        if (error.status === 401 && this.requestOnTokenSupported(request)) {
+          return this.refreshTokenAndRetry(next, request);
+        }
+        throw(error);
+      })
+    );
+  }
+
+  private refreshTokenAndRetry(next: HttpHandler, request: HttpRequest<any>) {
+    return this.authenticationService.refreshToken().pipe(
+      switchMap(() => next.handle(request)),
+      catchError(e => {
+        this.authenticationService.logout();
+        throw(e);
+      })
+    );
   }
 
   private requestOnTokenSupported(request: HttpRequest<any>): boolean {

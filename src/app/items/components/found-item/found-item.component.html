@@ -1,0 +1,19 @@
+<div style="display: flex; justify-content: center;">
+  <div style="max-width: 700px;" >
+    <p>
+      Serial number: {{(foundItem$ | async)?.serialNumber}}
+    </p>
+    <p>
+      Item name: {{(foundItem$ | async)?.name }}
+    </p>
+    <p>
+      Lost place: {{(foundItem$ | async)?.foundPlace}}
+    </p>
+    <p>
+      Lost date {{(foundItem$ | async)?.foundDate}}
+    </p>
+    <p>
+      Description {{(foundItem$ | async)?.description}}
+    </p>
+  </div>
+</div>

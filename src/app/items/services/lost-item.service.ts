@@ -9,24 +9,25 @@ import {pluck, switchMap, take} from "rxjs/operators";
   providedIn: 'root'
 })
 export class LostItemService {
+  private readonly endpoint = 'http://localhost:8080/api/items/lost-items';
 
   constructor(private http: HttpClient, private userService: UserService) { }
 
   public save(lostItem: LostItem): Observable<LostItem> {
-    return this.http.post<LostItem>("http://localhost:8080/api/items/lost-items", lostItem);
+    return this.http.post<LostItem>(this.endpoint, lostItem);
   }
 
   public search(searchPhrase: string): Observable<LostItem[]> {
-    return this.http.get<LostItem[]>(`http://localhost:8080/api/items/lost-items?search=${searchPhrase}`);
+    return this.http.get<LostItem[]>(`${this.endpoint}?search=${searchPhrase}`);
   }
 
   public userItems(): Observable<LostItem[]> {
     return this.userService.getUserId().pipe(
-      switchMap(id => this.http.get<LostItem[]>(`http://localhost:8080/api/items/lost-items?registrantId=${id}`))
+      switchMap(id => this.http.get<LostItem[]>(`${this.endpoint}?registrantId=${id}`))
     );
   }
 
   public getLostItemById(id: string): Observable<LostItem> {
-    return this.http.get<LostItem>(`http://localhost:8080/api/items/lost-items/${id}`);
+    return this.http.get<LostItem>(`${this.endpoint}/${id}`);
   }
 }

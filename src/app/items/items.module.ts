@@ -12,6 +12,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import { LostItemsListComponent } from './components/shared/lost-items-list/lost-items-list.component';
 import { FoundItemsListComponent } from './components/shared/found-items-list/found-items-list.component';
 import { LostItemComponent } from './components/lost-item/lost-item.component';
+import { FoundItemComponent } from './components/found-item/found-item.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { LostItemComponent } from './components/lost-item/lost-item.component';
     MyItemsComponent,
     LostItemsListComponent,
     FoundItemsListComponent,
-    LostItemComponent
+    LostItemComponent,
+    FoundItemComponent
   ],
   imports: [
     BrowserModule,
