@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
-import {MyItemsComponent} from "./my-items/my-items.component";
-import {AddFoundItemComponent} from "./add-found-item/add-found-item.component";
-import {AddLostItemComponent} from "./add-lost-item/add-lost-item.component";
-import {SearchItemsComponent} from "./search-items/search-items.component";
+import {MyItemsComponent} from "./components/my-items/my-items.component";
+import {AddFoundItemComponent} from "./components/add-found-item/add-found-item.component";
+import {AddLostItemComponent} from "./components/add-lost-item/add-lost-item.component";
+import {SearchItemsComponent} from "./components/search-items/search-items.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MaterialModule} from "../material.module";
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AppRoutingModule} from "../app-routing.module";
 import {BrowserModule} from "@angular/platform-browser";
-import { LostItemsListComponent } from './shared/lost-items-list/lost-items-list.component';
-import { FoundItemsListComponent } from './shared/found-items-list/found-items-list.component';
-import { LostItemComponent } from './lost-item/lost-item.component';
+import { LostItemsListComponent } from './components/shared/lost-items-list/lost-items-list.component';
+import { FoundItemsListComponent } from './components/shared/found-items-list/found-items-list.component';
+import { LostItemComponent } from './components/lost-item/lost-item.component';
 
 @NgModule({
   declarations: [
