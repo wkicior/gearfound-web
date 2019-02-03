@@ -7,9 +7,11 @@ import {SignUpComponent} from "./users/sign-up/sign-up.component";
 import {LogInComponent} from "./users/log-in/log-in.component";
 import {MyItemsComponent} from "./items/my-items/my-items.component";
 import {AuthenticationGuard} from "./auth/authentication.guard";
+import {LostItemComponent} from "./items/lost-item/lost-item.component";
 
 const routes: Routes = [
   { path: 'search', component: SearchItemsComponent },
+  { path: 'lost-item/:id', component: LostItemComponent },
   { path: 'add-lost-item', component: AddLostItemComponent, canActivate: [AuthenticationGuard] },
   { path: 'add-found-item', component: AddFoundItemComponent, canActivate: [AuthenticationGuard] },
   { path: 'my-items', component: MyItemsComponent, canActivate: [AuthenticationGuard] },

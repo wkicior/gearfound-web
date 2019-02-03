@@ -4,7 +4,7 @@
     <mat-expansion-panel *ngFor="let lostItem of (lostItems$ | async)">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{ lostItem.name }}
+          <a routerLink="/lost-item/{{lostItem.id}}">{{ lostItem.name }}</a>
         </mat-panel-title>
         <mat-panel-description>
           {{ lostItem.serialNumber }}

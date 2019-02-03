@@ -15,6 +15,7 @@ export class AddLostItemComponent implements OnInit {
 
   ngOnInit() {
     this.item = {
+      id: null,
       serialNumber: this.route.snapshot.paramMap.get('searchPhrase'),
       name: '',
       lostPlace: '',

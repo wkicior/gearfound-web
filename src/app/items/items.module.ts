@@ -11,6 +11,7 @@ import {AppRoutingModule} from "../app-routing.module";
 import {BrowserModule} from "@angular/platform-browser";
 import { LostItemsListComponent } from './shared/lost-items-list/lost-items-list.component';
 import { FoundItemsListComponent } from './shared/found-items-list/found-items-list.component';
+import { LostItemComponent } from './lost-item/lost-item.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FoundItemsListComponent } from './shared/found-items-list/found-items-l
     AddFoundItemComponent,
     MyItemsComponent,
     LostItemsListComponent,
-    FoundItemsListComponent
+    FoundItemsListComponent,
+    LostItemComponent
   ],
   imports: [
     BrowserModule,

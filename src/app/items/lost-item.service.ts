@@ -21,4 +21,8 @@ export class LostItemService {
   public userItems(): Observable<LostItem[]> {
     return this.http.get<LostItem[]>('http://localhost:8080/api/items/user/lost-items')
   }
+
+  public getLostItemById(id: string): Observable<LostItem> {
+    return this.http.get<LostItem>(`http://localhost:8080/api/items/lost-items/${id}`);
+  }
 }
