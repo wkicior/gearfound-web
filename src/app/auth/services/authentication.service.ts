@@ -14,7 +14,7 @@ export class AuthenticationService {
   constructor(private tokenService: TokenService, private sessionStorageService: SessionStorageService) { }
 
   login(email: string, password: string): Observable<void> {
-    return this.tokenService.getTokenExchange(email, password).pipe(
+    return this.tokenService.getTokenExchange(email.toLowerCase(), password).pipe(
       tap(exchangeToken => this.storeToken(exchangeToken)),
       switchMap(() => of(undefined))
     );
