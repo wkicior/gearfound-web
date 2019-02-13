@@ -1,3 +1,5 @@
+import {FoundItemForm} from "../components/add-found-item/add-found-item.component";
+
 export interface FoundItem {
   id: string;
   serialNumber: string;
@@ -7,3 +9,13 @@ export interface FoundItem {
   description: string;
 }
 
+export class FoundItemBuilder {
+  static fromFoundItemForm(f: FoundItemForm): FoundItem {
+    return {
+      id: null, serialNumber: f.get('serialNumber').value,
+      name: f.get('name').value,
+      foundPlace: f.get('foundPlace').value,
+      foundDate: f.get('foundDate').value,
+      description: f.get('description').value};
+  }
+}

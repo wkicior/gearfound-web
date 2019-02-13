@@ -1,29 +1,33 @@
 <div style="display: flex; justify-content: center;">
   <div style="max-width: 700px;" >
-    <div>
-      <mat-form-field>
-        <input matInput type="text" placeholder="IMEI/Serial number" [(ngModel)]="item.serialNumber">
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <input matInput type="text" placeholder="Name" required [(ngModel)]="item.name">
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <input matInput type="text" placeholder="Found place" [(ngModel)]="item.foundPlace">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="date" placeholder="Found date" [(ngModel)]="item.foundDate">
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field style="min-width: 300px">
-        <textarea matInput placeholder="Leave a description of item" [(ngModel)]="item.description"></textarea>
-      </mat-form-field>
-    </div>
-    <button mat-raised-button color="primary" (click)="save()">Register found item</button>
+    <form [formGroup]="foundItemForm" (ngSubmit)="save()">
+      <div>
+        <mat-form-field>
+          <input matInput type="text" placeholder="IMEI/Serial number" formControlName="serialNumber">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Name" formControlName="name">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Found place" formControlName="foundPlace">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" [max]="now" placeholder="Choose found date" formControlName="foundDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field style="min-width: 300px">
+          <textarea matInput placeholder="Leave a description of item" formControlName="description"></textarea>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!foundItemForm.valid">Register found item</button>
+    </form>
   </div>
 </div>
 
