@@ -1,29 +1,33 @@
 <div style="display: flex; justify-content: center;">
   <div style="max-width: 700px;" >
-    <div>
-      <mat-form-field>
-        <input matInput type="text" placeholder="IMEI/Serial number" [(ngModel)]="item.serialNumber">
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <input matInput type="text" placeholder="Name" required [(ngModel)]="item.name">
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <input matInput type="text" placeholder="Lost place" [(ngModel)]="item.lostPlace">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="date" placeholder="Lost date" [(ngModel)]="item.lostDate">
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field style="min-width: 300px">
-        <textarea matInput placeholder="Leave a description of item" [(ngModel)]="item.description"></textarea>
-      </mat-form-field>
-    </div>
-    <button mat-raised-button color="primary" (click)="save()">Register item as lost</button>
+    <form [formGroup]="lostItemForm" (ngSubmit)="save()">
+      <div>
+        <mat-form-field>
+          <input matInput type="text" placeholder="IMEI/Serial number" formControlName="serialNumber">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Name" formControlName="name">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Lost place" formControlName="lostPlace">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" [max]="now" placeholder="Choose lost date" formControlName="lostDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field style="min-width: 300px">
+          <textarea matInput placeholder="Leave a description of item" formControlName="description"></textarea>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" type="submit">Register item as lost</button>
+    </form>
   </div>
 </div>
 

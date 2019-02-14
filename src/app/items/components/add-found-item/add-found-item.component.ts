@@ -2,20 +2,7 @@ import {Component, Injectable, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FoundItemService} from "../../services/found-item.service";
 import {FoundItemBuilder} from "../../model/found-item";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-
-export class FoundItemForm extends FormGroup {
-
-  constructor() {
-    super({
-      serialNumber: new FormControl('', [Validators.required]),
-      name: new FormControl('', [Validators.required]),
-      foundPlace: new FormControl(''),
-      foundDate: new FormControl(''),
-      description: new FormControl('')
-    })
-  }
-}
+import {FoundItemForm} from "./found-item-form";
 
 
 @Component({

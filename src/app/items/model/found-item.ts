@@ -1,4 +1,4 @@
-import {FoundItemForm} from "../components/add-found-item/add-found-item.component";
+import {FoundItemForm} from "../components/add-found-item/found-item-form";
 
 export interface FoundItem {
   id: string;
