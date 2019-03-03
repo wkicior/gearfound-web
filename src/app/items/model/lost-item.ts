@@ -7,16 +7,19 @@ export interface LostItem {
   lostPlace: string;
   lostDate: Date;
   description: string;
+  registrantId: string;
 }
 
 
 export class LostItemBuilder {
   static fromLostItemForm(f: LostItemForm): LostItem {
     return {
-      id: null, serialNumber: f.get('serialNumber').value,
+      id: f.id,
+      serialNumber: f.get('serialNumber').value,
       name: f.get('name').value,
       lostPlace: f.get('lostPlace').value,
       lostDate: f.get('lostDate').value,
-      description: f.get('description').value};
+      description: f.get('description').value,
+      registrantId: ''};
   }
 }

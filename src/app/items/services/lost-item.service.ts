@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {LostItem} from "../model/lost-item";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {combineLatest, Observable} from "rxjs";
 import {UserService} from "../../users/services/user.service";
-import {pluck, switchMap, take} from "rxjs/operators";
+import {map, switchMap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +29,16 @@ export class LostItemService {
 
   public getLostItemById(id: string): Observable<LostItem> {
     return this.http.get<LostItem>(`${this.endpoint}/${id}`);
+  }
+
+  lostItemBelongsToUser(lostItem$: Observable<LostItem>) {
+    return combineLatest(lostItem$, this.userService.getUserId(), (item, userId) => ({item, userId}))
+      .pipe(
+        map(x => x.item.registrantId === x.userId)
+      );
+  }
+
+  edit(lostItem: LostItem): Observable<LostItem> {
+    return this.http.put<LostItem>(`${this.endpoint}/${lostItem.id}`, lostItem)
   }
 }

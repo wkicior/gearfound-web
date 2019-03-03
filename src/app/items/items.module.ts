@@ -14,6 +14,7 @@ import { FoundItemsListComponent } from './components/shared/found-items-list/fo
 import { LostItemComponent } from './components/lost-item/lost-item.component';
 import { FoundItemComponent } from './components/found-item/found-item.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { EditLostItemComponent } from './components/edit-lost-item/edit-lost-item.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     LostItemsListComponent,
     FoundItemsListComponent,
     LostItemComponent,
-    FoundItemComponent
+    FoundItemComponent,
+    EditLostItemComponent
   ],
   imports: [
     BrowserModule,

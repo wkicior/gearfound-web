@@ -1,0 +1,34 @@
+<div style="display: flex; justify-content: center;">
+  <div style="max-width: 700px;" >
+    <form [formGroup]="lostItemForm" (ngSubmit)="save()">
+      <div>
+        <mat-form-field>
+          <input matInput type="text" placeholder="IMEI/Serial number" formControlName="serialNumber">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Name" formControlName="name">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Lost place" formControlName="lostPlace">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" [max]="now" placeholder="Choose lost date" formControlName="lostDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field style="min-width: 300px">
+          <textarea matInput placeholder="Leave a description of item" formControlName="description"></textarea>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" type="submit">Save edit item</button>
+    </form>
+  </div>
+</div>
+
+

@@ -1,6 +1,7 @@
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 export class LostItemForm extends FormGroup {
+  id: string;
 
   constructor() {
     super({
