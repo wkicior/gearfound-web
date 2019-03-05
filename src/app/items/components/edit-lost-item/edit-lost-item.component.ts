@@ -3,7 +3,7 @@ import {Observable} from "rxjs";
 import {LostItem, LostItemBuilder} from "../../model/lost-item";
 import {LostItemService} from "../../services/lost-item.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {filter, share} from "rxjs/operators";
+import {filter, share, tap} from "rxjs/operators";
 import {LostItemForm} from "../add-lost-item/lost-item-form";
 
 @Component({
@@ -41,7 +41,7 @@ export class EditLostItemComponent implements OnInit {
   }
 
   private assertUserOwnsTheItem() {
-    this.lostItemService.lostItemBelongsToUser(this.lostItem$).pipe( //TODO: move it to guard?
+    this.lostItemService.lostItemBelongsToUser(this.lostItem$).pipe( //TODO: move it to guard?,
       filter(val => val === false)
     ).subscribe(() => this.router.navigate(['/']));
   }

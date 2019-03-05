@@ -31,11 +31,12 @@ export class LostItemService {
     return this.http.get<LostItem>(`${this.endpoint}/${id}`);
   }
 
-  lostItemBelongsToUser(lostItem$: Observable<LostItem>) {
-    return combineLatest(lostItem$, this.userService.getUserId(), (item, userId) => ({item, userId}))
-      .pipe(
-        map(x => x.item.registrantId === x.userId)
-      );
+  lostItemBelongsToUser(lostItem$: Observable<LostItem>) { //TODO: replace with LostItem, not Observable
+    return combineLatest(lostItem$, this.userService.getUserId()).pipe(
+      map( ([item, userId]) => {
+        return item.registrantId === userId
+      }),
+    );
   }
 
   edit(lostItem: LostItem): Observable<LostItem> {

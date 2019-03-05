@@ -13,12 +13,13 @@ import {share} from "rxjs/operators";
 export class LostItemComponent implements OnInit {
   lostItem$: Observable<LostItem>;
   lostItemBelongsToUser$: Observable<Boolean>;
+  id: string
 
   constructor(private lostItemService: LostItemService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.lostItem$ = this.lostItemService.getLostItemById(id).pipe(share());
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.lostItem$ = this.lostItemService.getLostItemById(this.id).pipe(share());
     this.lostItemBelongsToUser$ = this.lostItemService.lostItemBelongsToUser(this.lostItem$);
   }
 }
